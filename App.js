@@ -1,67 +1,14 @@
-import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-  Button,
-  TouchableHighlight,
-} from "react-native";
-
-// import { TouchableHighlight } from "react-native-web";
+import Accelerometer from "./app/screens/AccelerometerScreen";
+import TapGameScreen from "./app/screens/TapGameScreen";
+import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
-  const [countA, setA] = useState(0);
-  const [countB, setB] = useState(0);
+  const tapGame = <TapGameScreen/>
+  const accelerometer = <Accelerometer/>
+  const [screen, setScreen] = useState(<WelcomeScreen 
+    onTapGame={() => setScreen(tapGame)}
+    onAccelero={() => setScreen(accelerometer)}/>);
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" />
-      <TouchableHighlight onPress={() => setA(countA + 1)}>
-        <View style={styles.red} />
-      </TouchableHighlight>
-
-      <Text style={[styles.upsideDown, styles.counter]}>{countA}</Text>
-
-      <Text style={styles.counter}>{countB}</Text>
-
-      <TouchableHighlight onPress={() => setB(countB + 1)}>
-        <View style={styles.blue} />
-      </TouchableHighlight>
-    </SafeAreaView>
-  );
+  return screen;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex",
-    justifyContent: "space-around",
-  },
-
-  red: {
-    backgroundColor: "red",
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-  },
-  blue: {
-    backgroundColor: "blue",
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-  },
-  upsideDown: {
-    transform: [{ rotate: "180deg" }],
-  },
-  counter: {
-    fontSize: 40,
-    color: "white",
-  },
-});
