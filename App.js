@@ -1,23 +1,67 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+  Button,
+  TouchableHighlight,
+} from "react-native";
+
+// import { TouchableHighlight } from "react-native-web";
 
 export default function App() {
-  console.log("App executed")
-
+  const [countA, setA] = useState(0);
+  const [countB, setB] = useState(0);
 
   return (
-    <View style={styles.container}>
-      <Text>First edit</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <TouchableHighlight onPress={() => setA(countA + 1)}>
+        <View style={styles.red} />
+      </TouchableHighlight>
+
+      <Text style={[styles.upsideDown, styles.counter]}>{countA}</Text>
+
+      <Text style={styles.counter}>{countB}</Text>
+
+      <TouchableHighlight onPress={() => setB(countB + 1)}>
+        <View style={styles.blue} />
+      </TouchableHighlight>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+    justifyContent: "space-around",
+  },
+
+  red: {
+    backgroundColor: "red",
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+  },
+  blue: {
+    backgroundColor: "blue",
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+  },
+  upsideDown: {
+    transform: [{ rotate: "180deg" }],
+  },
+  counter: {
+    fontSize: 40,
+    color: "white",
   },
 });
